@@ -1,0 +1,24 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Background rounded square -->
+  <rect width="64" height="64" rx="14" ry="14" fill="url(#bg)"/>
+  <!-- Shine overlay -->
+  <rect width="64" height="30" rx="14" ry="14" fill="url(#shine)"/>
+  <!-- Lock body -->
+  <rect x="18" y="30" width="28" height="22" rx="5" ry="5" fill="#fff" fill-opacity="0.95"/>
+  <!-- Lock shackle -->
+  <path d="M22 30 v-8 a10 10 0 0 1 20 0 v8" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-opacity="0.95"/>
+  <!-- Keyhole circle -->
+  <circle cx="32" cy="40" r="4" fill="#7c3aed"/>
+  <!-- Keyhole slot -->
+  <rect x="30.5" y="42" width="3" height="5" rx="1.5" fill="#7c3aed"/>
+</svg>
