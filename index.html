@@ -1,93 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Code Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SecureCode – Generate encrypted secret codes instantly from text and numbers." />
+  <meta name="theme-color" content="#7c3aed" />
+  <meta property="og:title" content="SecureCode – Secret Code Generator" />
+  <meta property="og:description" content="Generate secure, cryptic codes instantly from text and numbers." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>SecureCode – Secret Code Generator</title>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="background-animation"></div>
-    
+
+  <!-- Animated Orbs Background -->
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">
+    <span id="themeIcon">☀️</span>
+  </button>
+
+  <!-- Main Content -->
+  <main class="main">
     <div class="card">
-        <!-- Header -->
-        <div class="card-header">
-            <div class="header-content">
-                <div class="icon-badge">🔐</div>
-                <h1>Secret Code</h1>
-                <p class="subtitle">Generate secure codes instantly</p>
-            </div>
+
+      <!-- Header -->
+      <header class="card-header">
+        <div class="logo-ring" aria-hidden="true">🔐</div>
+        <div>
+          <h1 class="logo-title">Secure<span>Code</span></h1>
+          <p class="logo-sub">Encrypt your text into a secret code</p>
+        </div>
+        <div class="header-tags" aria-hidden="true">
+          <span class="tag">⚡ Instant</span>
+          <span class="tag">🔒 Private</span>
+        </div>
+      </header>
+
+      <div class="rule"></div>
+
+      <!-- Form -->
+      <form class="form" id="codeForm" onsubmit="return false;" novalidate autocomplete="off">
+
+        <div class="field" id="field1">
+          <div class="field-meta">
+            <label for="code1">Text Input</label>
+            <span class="field-badge" id="charCount" aria-live="polite">0 / ∞</span>
+          </div>
+          <div class="input-group">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 10h16M4 14h10"/>
+            </svg>
+            <input type="text" id="code1" placeholder="Enter your text…" spellcheck="false" />
+          </div>
         </div>
 
-        <!-- Divider -->
-        <div class="divider"></div>
-
-        <!-- Form Section -->
-        <div class="form-section">
-            <!-- First Code Input -->
-            <div class="field">
-                <div class="field-header">
-                    <label>First Code</label>
-                    <span class="char-count" id="charCount">0 characters</span>
-                </div>
-                <div class="input-wrapper">
-                    <input type="text" id="code1" placeholder="Enter text..." />
-                    <span class="input-icon">📝</span>
-                </div>
-            </div>
-
-            <!-- Second Code Input -->
-            <div class="field">
-                <div class="field-header">
-                    <label>Second Code</label>
-                    <span class="field-hint">0-100 supported</span>
-                </div>
-                <div class="input-wrapper">
-                    <input type="number" id="code2" placeholder="Enter number..." min="0" max="100" />
-                    <span class="input-icon">🔢</span>
-                </div>
-            </div>
+        <div class="field" id="field2">
+          <div class="field-meta">
+            <label for="code2">Numeric Key</label>
+            <span class="field-badge">0 – 100</span>
+          </div>
+          <div class="input-group">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <path d="M8 12h8M12 8v8"/>
+            </svg>
+            <input type="number" id="code2" placeholder="Enter number…" min="0" max="100" />
+          </div>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="button-group">
-            <button id="processBtn" class="btn-primary" onclick="process()">
-                <span class="btn-text">Generate Code</span>
-                <span class="btn-icon">→</span>
-            </button>
-            <button class="btn-secondary" onclick="resetAll()">Reset</button>
+        <p class="kbd-hint" aria-hidden="true">
+          Hit <kbd>Enter</kbd> to generate &nbsp;·&nbsp; <kbd>Ctrl+Enter</kbd> anywhere
+        </p>
+
+        <div class="btn-row">
+          <button type="button" id="processBtn" class="btn-generate" onclick="process()">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            Generate Code
+            <div class="btn-shimmer" aria-hidden="true"></div>
+          </button>
+          <button type="button" class="btn-reset" onclick="resetAll()">↺ Reset</button>
         </div>
+      </form>
 
-        <!-- Result Section -->
-        <div class="result" id="result" hidden>
-            <div class="result-container">
-                <div class="result-header">
-                    <div class="status-badge">
-                        <span id="statusIcon" aria-hidden="true"></span>
-                    </div>
-                    <div class="status-text">
-                        <span id="statusText"></span>
-                    </div>
-                </div>
+      <!-- Result -->
+      <section class="result-section" id="result" hidden aria-live="polite" aria-atomic="true">
+        <div class="result-card" id="resultCard">
 
-                <div class="output-wrapper">
-                    <label class="output-label">Your Secret Code</label>
-                    <div class="output" id="output"></div>
-                </div>
-
-                <div class="result-actions">
-                    <button class="btn-action copy-btn" id="copyBtn" onclick="copy()" disabled>
-                        <span class="action-icon">📋</span>
-                        <span>Copy</span>
-                    </button>
-                    <span class="copied" id="copied">✓ Copied</span>
-                </div>
+          <div class="result-top">
+            <div class="status-pill">
+              <span id="statusIcon" aria-hidden="true"></span>
+              <span id="statusText"></span>
             </div>
-        </div>
-    </div>
+          </div>
 
-    <script src="script.js"></script>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-label">Secret Code</span>
+              <div class="code-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="code-display">
+              <code id="output" aria-label="Generated secret code"></code>
+            </div>
+          </div>
+
+          <button class="btn-copy" id="copyBtn" onclick="copy()" disabled aria-label="Copy code to clipboard">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span id="copyLabel">Copy to clipboard</span>
+          </button>
+
+        </div>
+      </section>
+
+    </div><!-- /card -->
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="assertive"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Built with <span class="footer-heart" aria-label="love">❤️</span> using
+    <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
